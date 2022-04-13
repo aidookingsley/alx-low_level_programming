@@ -19,5 +19,6 @@ int main(void)
 		y = sum;
 	}	
 	printf("%ld\n", tSum);
+
 	return (0);
 }
