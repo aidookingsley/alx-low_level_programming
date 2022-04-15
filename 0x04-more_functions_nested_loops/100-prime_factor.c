@@ -1,4 +1,4 @@
-#include <stfdio.h>
+#include <stdio.h>
 #include <math.h>
 
 /**
