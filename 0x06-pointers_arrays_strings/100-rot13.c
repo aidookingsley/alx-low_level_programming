@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * rot13 - encodes a string using rot13.
  * @s: input string.
@@ -9,7 +8,7 @@
 char *rot13(char *s)
 {
 	int count = 0, i;
-	char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
+	char alphabet[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	char rot13[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
 
 	while (*(s + count) != '\0')
@@ -21,7 +20,8 @@ char *rot13(char *s)
 				*(s + count) = rot13[i];
 				break;
 			}
-		}count++;
+		}
+		count++;
 	}
 	return (s);
 }
