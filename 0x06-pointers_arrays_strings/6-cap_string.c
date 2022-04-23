@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
  * cap_string - capitalizes all words of a string.
@@ -10,8 +9,8 @@
 
 char *cap_string(char *n)
 {
-	int count = 0, i;
-	int separators[] = {32, 9, 10, 44, 59, 46, 33, 63, 34, 40, 41, 123, 125};
+int count = 0, i;
+int separators[] = {32, 9, 10, 44, 59, 46, 33, 63, 34, 40, 41, 123, 125};
 
 if (*(s + count) >= 97 && *(s + count) <= 122)
 *(s + count) = *(s + count) - 32;
