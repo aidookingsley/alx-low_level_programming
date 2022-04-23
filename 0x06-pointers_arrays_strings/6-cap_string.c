@@ -3,6 +3,7 @@
 /**
  * cap_string - capitalizes all words of a string
  * @s: input string.
+ *
  * Return: string.
  */
 
@@ -28,7 +29,7 @@ char *cap_string(char *s)
 				}
 				j++;
 			}
-			if(check == 1)
+			if (check == 1)
 			{
 				s[i] -= 32;
 			}
