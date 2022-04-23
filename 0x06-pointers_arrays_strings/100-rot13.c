@@ -8,22 +8,24 @@
 
 char *rot13(char *s)
 {
-	int count = 0, i;
-	char alphabet[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	char rot13[] "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
+	int i = 0, j = 0;
+	char string_rot13[] = "NnOoPpQqRrSsTtUuVvWwXxYyZzAaBbCcDdEeFfGgHhIiJjKkLlMm";
+	char string_alpha[] = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
 
-	while(*(s + count) != '\0')
+	while (s[i] != '\0')
 	{
-		for (i = 0; i < 52; i++)
+		do
 		{
-			if (*(s + count) == alphabet[i])
+			if (s[i] == string_alpha[j])
 			{
-				*(s + count) = rot13[i];
+				s[i] = string_rot13[j];
 				break;
 			}
-		}
-		count++;
-	}
-
+			j++;	
+		}while (string_alpha[j] != '\0');
+		j = 0;
+		i++;	
+	}	
+	
 	return (s);
 }
