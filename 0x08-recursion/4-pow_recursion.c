@@ -16,5 +16,6 @@ int _pow_recursion(int x, int y)
 	else if (y != 0)
 		return (x * _pow_recursion(x, y - 1)); /* Recursive cal*/
 
-	else return (1);
+	else 
+		return (1);
 }
