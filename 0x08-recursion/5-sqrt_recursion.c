@@ -2,7 +2,7 @@
 /**
  * _evaluate - evaluate function sqrt
  * @i: integer
- * @i: integer
+ * @n: integer
  * Return: evaluate sqrt
  */
 
