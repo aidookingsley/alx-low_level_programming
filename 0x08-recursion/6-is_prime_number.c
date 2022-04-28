@@ -30,7 +30,7 @@ int evaluate_num(int num, int iterator)
 }
 
 /**
- *is_prime_number - evaluate prime or not 
+ * 6-is_prime_number - evaluate prime or not
  * @num: number
  * Return: return 1 prime - return 0 otherwise
  */
