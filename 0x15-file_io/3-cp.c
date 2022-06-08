@@ -1,50 +1,81 @@
 #include "main.h"
 
 /**
- * main - copies the content of a file to another file
- * @argc: number of arguments passed
- * @argv: double pointer
- * Return: the actual number of letters it could read and print
+ * cp - copies src to desinations
+ * @file_to: the destination file
+ * @file_from: the source file
+ *
+ * Return: integer
  */
-int main(int argc, char **argv)
+int cp(char *file_to, char *file_from)
 {
-	int f1, f2, n;
-	char buf[1024];
+	char *buffer[1024];
+	int td, fd, fr, fw;
+	int fc, ftc;
 
-	if (argc != 3)
+	fd = open(file_from, O_RDONLY);
+	if (fd < 0)
+		return (98);
+
+	td = open(file_to, O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	if (td < 0)
+		return (99);
+
+	fr = read(fd, buffer, 1024);
+	if (fr < 0)
+		return (98);
+
+	while (fr > 0)
 	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-		exit(97);
+		fw = write(td, buffer, fr);
+		if (fw < 0)
+			return (99);
+		fr = read(fd, buffer, 1024);
+		if (fr < 0)
+			return (98);
 	}
-	f1 = open(argv[1], O_RDONLY);
-	if (f1 == -1)
+
+	fc = close(fd);
+	if (fc < 0)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		exit(98);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fc);
+		return (100);
 	}
-	f2 = open(argv[2], O_CREAT | O_TRUNC | O_WRONLY, 0664);
-	while ((n = read(f1, buf, 1024)) > 0)
+	ftc = close(td);
+	if (ftc < 0)
 	{
-		if (write(f2, buf, n) != n || f2 == -1)
-		{
-			dprintf(STDERR_FILENO, "Erroe: Can't write to %s\n", argv[2]);
-			exit(99);
-		}
-	}
-	if (n == -1)
-	{
-		dprintf(STDERR_FILENO, "Erroe: Can't read from file %s\n", argv[1]);
-		exit(98);
-	}
-	if (close(f1) < 0)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", f1);
-		exit(100);
-	}
-	if (close(f2) < 0)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", f2);
-		exit(100);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", ftc);
+		return (100);
 	}
 	return (0);
+}
+
+/**
+ * main - the main function
+ * @ac: the argument count
+ * @av: the argument vector
+ *
+ * Return: always 0
+ */
+int main(int ac, char **av)
+{
+	int c;
+
+	if (ac != 3)
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n"), exit(97);
+
+	c = cp(av[2], av[1]);
+	switch (c)
+	{
+		case (98):
+			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]);
+			exit(98);
+		case (99):
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]);
+			exit(99);
+		case (100):
+			exit(100);
+		default:
+			return (0);
+	}
 }
