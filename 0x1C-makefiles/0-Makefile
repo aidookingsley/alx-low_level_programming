@@ -11,4 +11,4 @@ NAME = school
 
 # build an executable named school from school.c
 all: $(TARGET)
-       $(CC) $^ -o $(NAME)
+	$(CC) $^ -o $(NAME)
